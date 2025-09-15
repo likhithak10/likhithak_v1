@@ -22,6 +22,9 @@ export default function NavBar({ active }: NavBarProps) {
         <a href="https://www.linkedin.com/in/likhitha-koppula/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" className="icon-link">
           <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} />
         </a>
+        <a href="mailto:l2koppula@uwaterloo.ca" aria-label="Email" className="icon-link">
+          <Image src="/mail.png" alt="Email" width={24} height={24} />
+        </a>
       </div>
     </header>
   );
