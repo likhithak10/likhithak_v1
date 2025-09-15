@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #121212;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -10,11 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #121212;
     --foreground: #ededed;
   }
 }
@@ -22,5 +23,111 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Layout helpers */
+.container {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.nav-link {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 16px;
+  line-height: 1.25rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.nav-link-muted {
+  color: #828282;
+}
+
+.nav-link-muted:hover,
+.nav-link-muted:active {
+  color: #D9D9D9;
+}
+
+.nav-link-accent {
+  color: #A5C2E6;
+}
+
+.nav-link-accent:hover,
+.nav-link-accent:active {
+  color: #D9D9D9;
+}
+
+/* Light variant for nav links (used for 'about') */
+.nav-link-light {
+  color: #E3E3E3;
+}
+
+.nav-link-light:hover,
+.nav-link-light:active {
+  color: #D9D9D9;
+}
+
+/* Icon links underline on hover */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.icon-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: #D9D9D9;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms ease-in-out;
+}
+
+.icon-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Animated underline for bullet list links */
+.bullet-link {
+  text-decoration: none;
+  padding-bottom: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 240ms ease-in-out;
+}
+
+.bullet-link:hover,
+.group:hover .bullet-link {
+  background-size: 100% 1px;
+}
+
+/* Blinking caret used by NameTyper */
+.typing-caret {
+  position: relative;
+}
+
+.typing-caret::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background: currentColor;
+  margin-left: 2px;
+  transform: translateY(2px);
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
