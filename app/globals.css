@@ -3,6 +3,12 @@
 :root {
   --background: #121212;
   --foreground: #ededed;
+  --muted: #828282;
+  --accent-creative: #A5C2E6;
+  --accent-sde: #CAB5EB; /* Systems Design Eng & CERC (dark mode existing) */
+  --accent-cerc: #CAB5EB;
+  --accent-freedom: #E8CB87;
+  --accent-definity: #82A9D9;
 }
 
 @theme inline {
@@ -25,6 +31,18 @@ body {
   color: var(--foreground);
 }
 
+/* Light mode overrides */
+.light-mode {
+  --background: #FFFFFF;
+  --foreground: #121212; /* Everything that was D9D9D9-ish goes to 121212 */
+  --muted: #4a4a4a; /* body text, bullet text in light mode */
+  --accent-creative: #2978D9; /* creative */
+  --accent-sde: #7340C7; /* Systems Design Eng */
+  --accent-cerc: #7340C7; /* CERC */
+  --accent-freedom: #D19B1B; /* Freedom Mobile */
+  --accent-definity: #2B70C4; /* Definity */
+}
+
 /* Layout helpers */
 .container {
   max-width: 700px;
@@ -43,7 +61,7 @@ body {
 }
 
 .nav-link-muted {
-  color: #828282;
+  color: var(--muted);
 }
 
 .nav-link-muted:hover,
@@ -52,7 +70,7 @@ body {
 }
 
 .nav-link-accent {
-  color: #A5C2E6;
+  color: var(--accent-creative);
 }
 
 .nav-link-accent:hover,
@@ -62,13 +80,20 @@ body {
 
 /* Light variant for nav links (used for 'about') */
 .nav-link-light {
-  color: #E3E3E3;
+  color: var(--foreground);
 }
 
 .nav-link-light:hover,
 .nav-link-light:active {
   color: #D9D9D9;
 }
+
+/* Light-mode nav tweaks */
+.light-mode .nav-link:hover,
+.light-mode .nav-link:active {
+  color: #4a4a4a;
+}
+.light-mode .nav-link-muted { color: #797979; }
 
 /* Icon links underline on hover */
 .icon-link {
@@ -85,7 +110,7 @@ body {
   bottom: 0;
   height: 1px;
   width: 100%;
-  background: #D9D9D9;
+  background: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 200ms ease-in-out;
@@ -94,6 +119,32 @@ body {
 .icon-link:hover::after {
   transform: scaleX(1);
 }
+
+/* Light/Dark icon swapping */
+.light-only { display: none; }
+.light-mode .light-only { display: inline-block; }
+.light-mode .dark-only { display: none; }
+
+/* Theme icon toggle: instant swap (no animation) */
+.theme-icon-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* individual face transforms are handled via state rules below */
+
+/* Idle states: rotate flipper to bring the desired face forward */
+/* State styles: flip-crossfade without horizontal shift */
+.theme-icon-toggle.is-moon .theme-icon-face.moon { opacity: 1; transform: rotateY(0deg); }
+.theme-icon-toggle.is-moon .theme-icon-face.sun { opacity: 0; transform: rotateY(-90deg); }
+
+.theme-icon-toggle.is-sun .theme-icon-face.sun { opacity: 1; transform: rotateY(0deg); }
+.theme-icon-toggle.is-sun .theme-icon-face.moon { opacity: 0; transform: rotateY(90deg); }
 
 /* Animated underline for bullet list links */
 .bullet-link {
@@ -110,6 +161,14 @@ body {
 .group:hover .bullet-link {
   background-size: 100% 1px;
 }
+
+/* Semantic color utilities for content links on home page */
+.text-muted { color: var(--muted); }
+.text-creative { color: var(--accent-creative); }
+.text-sde { color: var(--accent-sde); }
+.text-cerc { color: var(--accent-cerc); }
+.text-freedom { color: var(--accent-freedom); }
+.text-definity { color: var(--accent-definity); }
 
 /* Blinking caret used by NameTyper */
 .typing-caret {
